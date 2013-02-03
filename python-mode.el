@@ -5421,8 +5421,8 @@ SYMMETRIC:
             (this-end (point-min)))
         ;; if inside a string and beginning of paragraph < beginning of string
         ;; use beginning of string
-        (when (and (nth 3 pps) (< beg (nth 8 pps))
-                   (setq beg (nth 8 pps)))
+        (when (nth 3 pps) 
+	  (setq beg (nth 8 pps))
           (setq end (py-end-of-string-intern pps)))
         (save-excursion
           (save-restriction
@@ -5631,11 +5631,7 @@ JUSTIFY should be used (if applicable) as in `fill-paragraph'."
 
             ;; (when (or (eq style 'pep-257)(eq style 'pep-257-nn))
             (widen)
-            (indent-region beg end)
-            (goto-char (1+ (+ beg delim-length)))
-            (end-of-line)
-            (skip-chars-backward " \"\t\r\n\f")
-            (unless (eq (char-after) ?\") (newline)))
+            (indent-region beg end))
           (widen))))))
 
 (defun py-fill-decorator (&optional justify)
